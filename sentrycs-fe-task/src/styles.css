@@ -1,0 +1,58 @@
+.container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.box-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.box {
+  width: 60px;
+  height: 60px;
+  margin: 0 5px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid gray;
+  transition: border-color 0.3s;
+}
+
+.default-border {
+  border-color: gray;
+}
+.green-border {
+  border-color: green;
+}
+.red-border {
+  border-color: red;
+}
+
+.keyboard {
+  margin-top: 1rem;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.keyboard-row button {
+  margin: 4px;
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  min-width: 40px;
+}
+
+.letters button,
+.actions button {
+  margin: 4px;
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
