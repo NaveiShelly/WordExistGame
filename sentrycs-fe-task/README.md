@@ -25,7 +25,7 @@ You can play the game online via StackBlitz:
 
 ```bash
 git clone https://github.com/NaveiShelly/WordExistGame.git
-cd WordExistGame
+cd sentrycs-fe-task
 npm install
 npm start
 ```
