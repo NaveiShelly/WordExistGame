@@ -16,11 +16,6 @@ A Wordle-inspired game built with React, where users try to guess a 5-letter wor
 
 ---
 
-## 🚀 Live Preview
-
-You can play the game online via StackBlitz:
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/YOUR_USERNAME/YOUR_REPO)
-
 ## 📦 Installation
 
 ```bash
