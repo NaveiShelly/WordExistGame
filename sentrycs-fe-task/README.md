@@ -20,6 +20,7 @@ A Wordle-inspired game built with React, where users try to guess a 5-letter wor
 
 ```bash
 git clone https://github.com/NaveiShelly/WordExistGame.git
+cd WordExistGame
 cd sentrycs-fe-task
 npm install
 npm start
