@@ -14,7 +14,11 @@ const Keyboard = () => {
   };
 
   const handleEnter = async () => {
-    if (state.letters.length < 5) return;
+    if (state.letters.length < 5) {
+      dispatch({ type: "SET_RESULT", payload: "fail" });
+      return;
+    }
+
     const word = state.letters.join("");
     const exists = await checkWordExists(word);
     dispatch({ type: "SET_RESULT", payload: exists ? "success" : "fail" });
