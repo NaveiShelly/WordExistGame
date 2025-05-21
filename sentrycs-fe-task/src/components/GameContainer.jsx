@@ -5,6 +5,7 @@ import Keyboard from "./Keyboard";
 import { useKeyboard } from "../hooks/useKeyboard";
 
 function GameContainer() {
+  
   const { state } = useGame();
   const keyboardHandlers = useKeyboard();
 

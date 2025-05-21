@@ -1,17 +1,21 @@
 import React, { useCallback, useMemo } from "react";
 
-const KeyboardButton = React.memo(({ key, onClick, children }) => (
-  <button
-    className="keyboard-key"
-    onClick={onClick}
-  >
-    {children}
-  </button>
-));
+const KeyboardButton = React.memo(({ keyValue, onClick, children }) => {
+  return (
+    <button
+      className="keyboard-key"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+});
 
 KeyboardButton.displayName = 'KeyboardButton';
 
 const Keyboard = React.memo(({handleLetter, handleBackspace, handleEnter}) => {
+  console.log('Keyboard component render');
+  
   const rows = useMemo(() => [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
@@ -31,6 +35,7 @@ const Keyboard = React.memo(({handleLetter, handleBackspace, handleEnter}) => {
   const renderButton = useCallback((key) => (
     <KeyboardButton
       key={key}
+      keyValue={key}
       onClick={createButtonHandler(key)}
     >
       {key}
