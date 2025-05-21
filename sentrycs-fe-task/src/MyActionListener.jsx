@@ -26,3 +26,5 @@ export default class MyActionListener {
     listeners.forEach((fn) => fn(data));
   }
 }
+
+export const actionListener = new MyActionListener();

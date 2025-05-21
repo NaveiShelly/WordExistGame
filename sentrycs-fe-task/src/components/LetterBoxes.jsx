@@ -1,9 +1,7 @@
 import React from "react";
-import { useGame } from "../context/GameContext";
 import "../styles.css";
 
-const LetterBoxes = () => {
-  const { state } = useGame();
+const LetterBoxes = ({state}) => {
 
   return (
     <div className="box-row">
@@ -27,4 +25,4 @@ const LetterBoxes = () => {
   );
 };
 
-export default LetterBoxes;
+export default React.memo(LetterBoxes);

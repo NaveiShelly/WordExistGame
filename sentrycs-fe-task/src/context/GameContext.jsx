@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from "react";
+import React, { createContext, useReducer, useContext, useMemo, useCallback } from "react";
 
 // Initial state
 const initialState = {
@@ -34,8 +34,16 @@ export const useGame = () => useContext(GameContext);
 // Provider
 export const GameProvider = ({ children }) => {
   const [state, dispatch] = useReducer(gameReducer, initialState);
+  
+  const memoizedDispatch = useCallback(dispatch, []);
+  
+  const value = useMemo(() => ({
+    state,
+    dispatch: memoizedDispatch
+  }), [state, memoizedDispatch]);
+
   return (
-    <GameContext.Provider value={{ state, dispatch }}>
+    <GameContext.Provider value={value}>
       {children}
     </GameContext.Provider>
   );

@@ -1,65 +1,55 @@
-import React from "react";
-import { useGame } from "../context/GameContext";
-import { checkWordExists } from "../utils/checkWord";
+import React, { useCallback, useMemo } from "react";
 
-const Keyboard = () => {
-  const { state, dispatch } = useGame();
+const KeyboardButton = React.memo(({ key, onClick, children }) => (
+  <button
+    className="keyboard-key"
+    onClick={onClick}
+  >
+    {children}
+  </button>
+));
 
-  const handleLetter = (char) => {
-    dispatch({ type: "ADD_LETTER", payload: char });
-  };
+KeyboardButton.displayName = 'KeyboardButton';
 
-  const handleBackspace = () => {
-    dispatch({ type: "REMOVE_LETTER" });
-  };
-
-  const handleEnter = async () => {
-    if (state.letters.length < 5) {
-      dispatch({ type: "SET_RESULT", payload: "fail" });
-      return;
-    }
-
-    const word = state.letters.join("");
-    const exists = await checkWordExists(word);
-    dispatch({ type: "SET_RESULT", payload: exists ? "success" : "fail" });
-  };
-
-  // Define keyboard rows
-  const rows = [
+const Keyboard = React.memo(({handleLetter, handleBackspace, handleEnter}) => {
+  const rows = useMemo(() => [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
     ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     ["Enter", "Z", "X", "C", "V", "B", "N", "M", "Backspace"],
-  ];
+  ], []);
+
+  const createButtonHandler = useCallback((key) => {
+    if (key === "Enter") {
+      return handleEnter;
+    } else if (key === "Backspace") {
+      return handleBackspace;
+    } else {
+      return () => handleLetter(key);
+    }
+  }, [handleLetter, handleBackspace, handleEnter]);
+
+  const renderButton = useCallback((key) => (
+    <KeyboardButton
+      key={key}
+      onClick={createButtonHandler(key)}
+    >
+      {key}
+    </KeyboardButton>
+  ), [createButtonHandler]);
+
+  const renderRow = useCallback((row, rowIndex) => (
+    <div key={rowIndex} className="keyboard-row">
+      {row.map(renderButton)}
+    </div>
+  ), [renderButton]);
 
   return (
     <div className="keyboard">
-      {rows.map((row, rowIndex) => (
-        <div className="keyboard-row" key={rowIndex}>
-          {row.map((key) => {
-            if (key === "Enter") {
-              return (
-                <button key="Enter" onClick={handleEnter}>
-                  Enter
-                </button>
-              );
-            } else if (key === "Backspace") {
-              return (
-                <button key="Backspace" onClick={handleBackspace}>
-                  ←
-                </button>
-              );
-            } else {
-              return (
-                <button key={key} onClick={() => handleLetter(key)}>
-                  {key}
-                </button>
-              );
-            }
-          })}
-        </div>
-      ))}
+      {rows.map(renderRow)}
     </div>
   );
-};
+});
+
+Keyboard.displayName = 'Keyboard';
 
 export default Keyboard;
